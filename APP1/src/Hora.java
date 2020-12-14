@@ -2,7 +2,7 @@
 // Fig. 26.6: Hora.java
 // Archivo de bean de página que establece textoReloj a la hora en el servidor Web.
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
-
+import com.sun.rave.web.ui.component.Body;
 import com.sun.rave.web.ui.component.Form;
 import com.sun.rave.web.ui.component.Head;
 import com.sun.rave.web.ui.component.Html;
