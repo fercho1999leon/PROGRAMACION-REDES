@@ -1,4 +1,4 @@
-/*
+/*Arreaga Manzaba Roger-------------------------------------------------------------------------
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -48,7 +48,7 @@ public class DatosIngreso extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-/-----------------------------------------HUACON----------------------------
+//-----------------------------------------HUACON----------------------------
                     .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
