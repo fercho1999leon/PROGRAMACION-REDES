@@ -2,6 +2,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,9 +19,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    private int Intentos;
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+        Intentos = 0;
     }
 
     /**
@@ -73,6 +76,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtContrasena.setName("txtContrasena"); // NOI18N
+        txtContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContrasenaActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -198,11 +206,17 @@ public class Login extends javax.swing.JFrame {
             String strLine;
             buferR = new BufferedReader(new FileReader("src/Base_de_Datos/DataB.txt"));
             while((strLine = buferR.readLine())!=null){
-                if(strLine.equals(txtUsuario.getText())){
+                if(strLine.equals(txtUsuario.getText()) && Intentos < 3){
                     if((strLine = buferR.readLine()).equals(txtContrasena.getText())){
                         System.out.println("Access");
+                        Intentos = 0;
+                        buferR.close();
                         break;
+                    }else{
+                        Intentos ++;
                     }
+                }else{
+                    Intentos ++;
                 }
             }
         }catch(IOException e){
@@ -217,6 +231,10 @@ public class Login extends javax.swing.JFrame {
     private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
         btnLogin.setText("");
     }//GEN-LAST:event_btnLoginMouseExited
+
+    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContrasenaActionPerformed
 
     /**
      * @param args the command line arguments
