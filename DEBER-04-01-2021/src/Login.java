@@ -201,26 +201,28 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        BufferedReader buferR = null;
-        try{
-            String strLine;
-            buferR = new BufferedReader(new FileReader("src/Base_de_Datos/DataB.txt"));
-            while((strLine = buferR.readLine())!=null){
-                if(strLine.equals(txtUsuario.getText()) && Intentos < 3){
-                    if((strLine = buferR.readLine()).equals(txtContrasena.getText())){
-                        System.out.println("Access");
-                        Intentos = 0;
-                        buferR.close();
-                        break;
-                    }else{
-                        Intentos ++;
-                    }
-                }else{
-                    Intentos ++;
-                }
-            }
-        }catch(IOException e){
-            System.out.println(e.getMessage());
+        if(Intentos < 3){
+           BufferedReader buferR = null;
+           try{
+               String strLine;
+               buferR = new BufferedReader(new FileReader("src/Base_de_Datos/DataB.txt"));
+               while((strLine = buferR.readLine())!=null){
+                   if(strLine.equals(txtUsuario.getText())){
+                       if((strLine = buferR.readLine()).equals(txtContrasena.getText())){
+                           System.out.println("Access");
+                           Intentos = 0;
+                           buferR.close();
+                           this.setVisible(false);
+                       }
+                   }
+               }
+               Intentos ++;
+               JOptionPane.showMessageDialog(null, "Intento: "+Intentos,"Inicio de seccion",JOptionPane.INFORMATION_MESSAGE);
+           }catch(IOException e){
+               System.out.println(e.getMessage());
+           }
+        }else{
+            JOptionPane.showMessageDialog(null, "AL CANZO EL MAXIMO DE INTENTO","Inicio de seccion",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
