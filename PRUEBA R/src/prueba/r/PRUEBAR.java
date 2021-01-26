@@ -10,10 +10,10 @@ package prueba.r;
  * @author Asus
  */
 public class PRUEBAR {
-
-    /**
-     * @param args the command line arguments
-     */
+// VLZ
+    // VLZ x2
+    // * @param args the command line arguments
+  //   */
     public static void main(String[] args) {
         // TODO code application logic here
     }
