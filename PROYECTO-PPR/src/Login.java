@@ -1,3 +1,7 @@
+
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,9 +17,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        N_Intentos = 0;
     }
 
     /**
@@ -35,10 +41,10 @@ public class Login extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
+        txtContrasena = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        lbPasswordRecovery = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,6 +75,11 @@ public class Login extends javax.swing.JFrame {
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/minimizar.png"))); // NOI18N
         btnMinimizar.setBorderPainted(false);
         btnMinimizar.setContentAreaFilled(false);
+        btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinimizarActionPerformed(evt);
+            }
+        });
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cerrar.png"))); // NOI18N
         btnCerrar.setBorderPainted(false);
@@ -94,7 +105,7 @@ public class Login extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -107,7 +118,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("CONTRASEÑA");
 
-        jTextField2.setPreferredSize(null);
+        txtContrasena.setPreferredSize(null);
 
         btnLogin.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/login_80.png"))); // NOI18N
@@ -121,9 +132,19 @@ public class Login extends javax.swing.JFrame {
                 btnLoginMouseExited(evt);
             }
         });
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel4.setText("¿Olvido la contraseña?");
+        lbPasswordRecovery.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lbPasswordRecovery.setText("¿Olvido la contraseña o usuario?");
+        lbPasswordRecovery.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPasswordRecoveryMouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/login_icon_176905.png"))); // NOI18N
@@ -141,12 +162,12 @@ public class Login extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(41, 41, 41)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)))
+                                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbPasswordRecovery)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5))
@@ -161,13 +182,13 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(jLabel4)
+                .addComponent(lbPasswordRecovery)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -213,9 +234,72 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setText("");
     }//GEN-LAST:event_btnLoginMouseExited
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        try {
+            // TODO add your handling code here:
+            //Se crea la coneccion 
+            Connection my_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+BaseDatos+"?serverTimezone=UTC", "PROYECTO_PPR", "Fernando1999");//PONER LA BASE DE DATOS(proyecto_ppr)
+            //Se crea objeto del tipo statement
+            Statement my_statement = my_connection.createStatement();
+            //Ejecutar sentencia Sql
+            ResultSet my_resultSet = my_statement.executeQuery("SELECT * FROM "+Tabla);//SE PONE LA TABLA DE USUARIOS (usuario)
+            //Recorrer resultset
+            while(my_resultSet.next()){
+                if(txtUsuario.getText().equals(my_resultSet.getString("actor_id"))){//Se pone el campo de id de usuario de la DB (usuario_id)
+                    if(txtContrasena.getText().equals(my_resultSet.getString("first_name"))){//Se pone el campo de contraseña de la DB(contrasena)
+                        System.out.println("Access");
+                        N_Intentos = 0;
+                        this.setVisible(false);
+                        this.dispose();
+                    }
+                }
+            }
+            if(this.isVisible()){
+                N_Intentos ++;
+                JOptionPane.showMessageDialog(null, "Intento: "+N_Intentos,"Inicio de seccion",JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Erro: "+e.getMessage());
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
+        // TODO add your handling code here:
+        this.setExtendedState(javax.swing.JFrame.ICONIFIED);
+    }//GEN-LAST:event_btnMinimizarActionPerformed
+
+    private void lbPasswordRecoveryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPasswordRecoveryMouseClicked
+        // TODO add your handling code here:
+        boolean Bandera = false;
+        String in = JOptionPane.showInputDialog(lbPasswordRecovery,"INGRESE EL CORREO.","RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.QUESTION_MESSAGE);
+        if(in!=null){
+            try {
+                //Se crea la coneccion
+                Connection my_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+BaseDatos+"?serverTimezone=UTC", "PROYECTO_PPR", "Fernando1999");//PONER LA BASE DE DATOS(proyecto_ppr)
+                //Se crea objeto del tipo statement
+                Statement my_statement = my_connection.createStatement();
+                //Ejecutar sentencia Sql
+                ResultSet my_resultSet = my_statement.executeQuery("SELECT * FROM "+Tabla);//SE PONE LA TABLA DE USUARIOS (usuario)
+                //Recorrer resultset
+                while(my_resultSet.next()){
+                    if(my_resultSet.getString("last_name").equals(in)){
+                        JOptionPane.showMessageDialog(null, "SU USUARIO ES: "+my_resultSet.getString("actor_id")+"\nSU CONTRASEÑA ES: "+my_resultSet.getString("first_name"),"RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
+                        Bandera = true;
+                        break;
+                    }
+                }
+                if(!Bandera)JOptionPane.showMessageDialog(null, "CORREO NO ENCONTRADO","RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
+            } catch (SQLException e) {
+                System.out.println("Error: "+e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_lbPasswordRecoveryMouseClicked
+
     /**
      * @param args the command line arguments
      */
+    @SuppressWarnings("Convert2Lambda")
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -255,12 +339,15 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lbPasswordRecovery;
+    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+    private int N_Intentos;
+    private final String BaseDatos = "sakila";
+    private final String Tabla = "ACTOR";
 }
