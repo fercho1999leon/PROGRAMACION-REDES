@@ -42,15 +42,15 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        txtContrasena = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         lbPasswordRecovery = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbCrearUser = new javax.swing.JLabel();
+        txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setOpacity(0.95F);
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(500, 258));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
 
@@ -75,6 +75,7 @@ public class Login extends javax.swing.JFrame {
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/minimizar.png"))); // NOI18N
         btnMinimizar.setBorderPainted(false);
         btnMinimizar.setContentAreaFilled(false);
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMinimizarActionPerformed(evt);
@@ -84,6 +85,7 @@ public class Login extends javax.swing.JFrame {
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cerrar.png"))); // NOI18N
         btnCerrar.setBorderPainted(false);
         btnCerrar.setContentAreaFilled(false);
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);
@@ -118,12 +120,17 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("CONTRASEÑA");
 
-        txtContrasena.setPreferredSize(null);
+        txtUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(112, 112, 112));
+        txtUsuario.setText("Ingrese el usuario");
+        txtUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         btnLogin.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/login_80.png"))); // NOI18N
         btnLogin.setBorderPainted(false);
         btnLogin.setContentAreaFilled(false);
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnLoginMouseEntered(evt);
@@ -140,59 +147,69 @@ public class Login extends javax.swing.JFrame {
 
         lbPasswordRecovery.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbPasswordRecovery.setText("¿Olvido la contraseña o usuario?");
+        lbPasswordRecovery.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbPasswordRecovery.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbPasswordRecoveryMouseClicked(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/login_icon_176905.png"))); // NOI18N
-        jLabel5.setText("Crear nuevo usuario");
+        lbCrearUser.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lbCrearUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/login_icon_176905.png"))); // NOI18N
+        lbCrearUser.setText("Crear nuevo usuario");
+        lbCrearUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbCrearUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCrearUserMouseClicked(evt);
+            }
+        });
+
+        txtContrasena.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtContrasena.setForeground(new java.awt.Color(112, 112, 112));
+        txtContrasena.setText("jPasswordField1");
+        txtContrasena.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(41, 41, 41)
-                                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbPasswordRecovery)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(btnLogin)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addGap(47, 47, 47)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3)
+                .addGap(15, 15, 15)
+                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addComponent(lbPasswordRecovery))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(btnLogin))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lbCrearUser))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addGap(9, 9, 9)
                 .addComponent(lbPasswordRecovery)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(lbCrearUser))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -259,9 +276,9 @@ public class Login extends javax.swing.JFrame {
                     N_Intentos ++;
                     JOptionPane.showMessageDialog(null, "Intento: "+N_Intentos,"Inicio de seccion",JOptionPane.INFORMATION_MESSAGE);
                 }
-            
+                my_connection.close();
             } catch (SQLException e) {
-                System.out.println("Erro: "+e.getMessage());
+                System.out.println("Error: "+e.getMessage());
             }
         }else{
             JOptionPane.showMessageDialog(null, "Ya no tiene mas intentos","Seccion Cerrada",JOptionPane.INFORMATION_MESSAGE);
@@ -295,11 +312,18 @@ public class Login extends javax.swing.JFrame {
                     }
                 }
                 if(!Bandera)JOptionPane.showMessageDialog(null, "CORREO NO ENCONTRADO","RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
+                my_connection.close();
             } catch (SQLException e) {
                 System.out.println("Error: "+e.getMessage());
             }
         }
     }//GEN-LAST:event_lbPasswordRecoveryMouseClicked
+
+    private void lbCrearUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearUserMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        new Crear_Usuario().setVisible(true);
+    }//GEN-LAST:event_lbCrearUserMouseClicked
 
     /**
      * @param args the command line arguments
@@ -344,12 +368,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbCrearUser;
     private javax.swing.JLabel lbPasswordRecovery;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
     private int N_Intentos;
