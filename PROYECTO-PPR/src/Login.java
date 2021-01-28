@@ -235,32 +235,37 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginMouseExited
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
-            // TODO add your handling code here:
-            //Se crea la coneccion 
-            Connection my_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+BaseDatos+"?serverTimezone=UTC", "PROYECTO_PPR", "Fernando1999");//PONER LA BASE DE DATOS(proyecto_ppr)
-            //Se crea objeto del tipo statement
-            Statement my_statement = my_connection.createStatement();
-            //Ejecutar sentencia Sql
-            ResultSet my_resultSet = my_statement.executeQuery("SELECT * FROM "+Tabla);//SE PONE LA TABLA DE USUARIOS (usuario)
-            //Recorrer resultset
-            while(my_resultSet.next()){
-                if(txtUsuario.getText().equals(my_resultSet.getString("actor_id"))){//Se pone el campo de id de usuario de la DB (usuario_id)
-                    if(txtContrasena.getText().equals(my_resultSet.getString("first_name"))){//Se pone el campo de contraseña de la DB(contrasena)
-                        System.out.println("Access");
-                        N_Intentos = 0;
-                        this.setVisible(false);
-                        this.dispose();
+        if(N_Intentos < 3){
+            try {
+                // TODO add your handling code here:
+                //Se crea la coneccion 
+                Connection my_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+BaseDatos+"?serverTimezone=UTC", "PROYECTO_PPR", "Fernando1999");//PONER LA BASE DE DATOS(proyecto_ppr)
+                //Se crea objeto del tipo statement
+                Statement my_statement = my_connection.createStatement();
+                //Ejecutar sentencia Sql
+                ResultSet my_resultSet = my_statement.executeQuery("SELECT * FROM "+Tabla);//SE PONE LA TABLA DE USUARIOS (usuario)
+                //Recorrer resultset
+                while(my_resultSet.next()){
+                    if(txtUsuario.getText().equals(my_resultSet.getString("users"))){//Se pone el campo de id de usuario de la DB (usuario_id)
+                        if(txtContrasena.getText().equals(my_resultSet.getString("contraseniaUsuario"))){//Se pone el campo de contraseña de la DB(contrasena)
+                            System.out.println("Access");
+                            N_Intentos = 0;
+                            this.setVisible(false);
+                            this.dispose();
+                        }
                     }
                 }
-            }
-            if(this.isVisible()){
-                N_Intentos ++;
-                JOptionPane.showMessageDialog(null, "Intento: "+N_Intentos,"Inicio de seccion",JOptionPane.INFORMATION_MESSAGE);
-            }
+                if(this.isVisible() && N_Intentos < 3){
+                    N_Intentos ++;
+                    JOptionPane.showMessageDialog(null, "Intento: "+N_Intentos,"Inicio de seccion",JOptionPane.INFORMATION_MESSAGE);
+                }
             
-        } catch (SQLException e) {
-            System.out.println("Erro: "+e.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Erro: "+e.getMessage());
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ya no tiene mas intentos","Seccion Cerrada",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -283,8 +288,8 @@ public class Login extends javax.swing.JFrame {
                 ResultSet my_resultSet = my_statement.executeQuery("SELECT * FROM "+Tabla);//SE PONE LA TABLA DE USUARIOS (usuario)
                 //Recorrer resultset
                 while(my_resultSet.next()){
-                    if(my_resultSet.getString("last_name").equals(in)){
-                        JOptionPane.showMessageDialog(null, "SU USUARIO ES: "+my_resultSet.getString("actor_id")+"\nSU CONTRASEÑA ES: "+my_resultSet.getString("first_name"),"RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
+                    if(my_resultSet.getString("correoUsuario").equals(in)){
+                        JOptionPane.showMessageDialog(null, "SU USUARIO ES: "+my_resultSet.getString("users")+"\nSU CONTRASEÑA ES: "+my_resultSet.getString("contraseniaUsuario"),"RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
                         Bandera = true;
                         break;
                     }
@@ -348,6 +353,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
     private int N_Intentos;
-    private final String BaseDatos = "sakila";
-    private final String Tabla = "ACTOR";
+    private final String BaseDatos = "PROYECTOPPR";
+    private final String Tabla = "REGISTROUSUARIO";
 }
