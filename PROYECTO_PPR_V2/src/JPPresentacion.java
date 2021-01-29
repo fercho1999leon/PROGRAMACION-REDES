@@ -1,3 +1,6 @@
+
+import complementos.SaveSVGformatInSQLofTwitter;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -40,6 +43,11 @@ public class JPPresentacion extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/lobo-200.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 200, 200));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -47,6 +55,12 @@ public class JPPresentacion extends javax.swing.JPanel {
         jLabel3.setText("JAVAMANIACS");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        SaveSVGformatInSQLofTwitter OBJ = new SaveSVGformatInSQLofTwitter("src/scriptPython/dataTwitter/FileName.csv");
+        OBJ.start();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

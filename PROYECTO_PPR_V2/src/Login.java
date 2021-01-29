@@ -1,4 +1,5 @@
 
+import complementos.MySqlConnection;
 import java.awt.CardLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -222,7 +223,7 @@ public class Login extends javax.swing.JFrame {
             try {
                 // TODO add your handling code here:
                 //Se crea la coneccion 
-                Connection my_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+BaseDatos+"?serverTimezone=UTC", "PROYECTO_PPR", "Fernando1999");//PONER LA BASE DE DATOS(proyecto_ppr)
+                Connection my_connection = (new MySqlConnection().conetMysql());//PONER LA BASE DE DATOS(proyecto_ppr)
                 //Se crea objeto del tipo statement
                 Statement my_statement = my_connection.createStatement();
                 //Ejecutar sentencia Sql
@@ -263,7 +264,7 @@ public class Login extends javax.swing.JFrame {
         if(in!=null){
             try {
                 //Se crea la coneccion
-                Connection my_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+BaseDatos+"?serverTimezone=UTC", "PROYECTO_PPR", "Fernando1999");//PONER LA BASE DE DATOS(proyecto_ppr)
+                Connection my_connection = (new MySqlConnection().conetMysql());//PONER LA BASE DE DATOS(proyecto_ppr)
                 //Se crea objeto del tipo statement
                 Statement my_statement = my_connection.createStatement();
                 //Ejecutar sentencia Sql
