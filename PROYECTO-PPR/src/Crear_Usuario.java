@@ -219,7 +219,7 @@ public class Crear_Usuario extends javax.swing.JFrame {
             lbMessageIncorecPass.setVisible(false);
             String[] name = {txtName.getText()+txtLastName.getText(),txtName.getText(),txtLastName.getText(),txtMail.getText(),txtUser.getText(),password};
             try{
-                Connection my_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+BaseDatos+"?serverTimezone=UTC", "PROYECTO_PPR", "Fernando1999");
+                Connection my_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+BaseDatos+"?serverTimezone=UTC", "root", "");
                 Statement my_statement = my_connection.createStatement();
                 my_statement.execute("INSERT INTO "+Tabla+" VALUE ('"+name[0]+"','"+name[1]+"','"+name[2]+"','"+name[3]+"','"+name[4]+"','"+name[5]+"')");
                 JOptionPane.showMessageDialog(null,"EL USUARIO SE CREO CORRECTAMENTE\nNombre: "+name[1]+"\nApellido: "+name[2],"CORRECTO",JOptionPane.INFORMATION_MESSAGE);
