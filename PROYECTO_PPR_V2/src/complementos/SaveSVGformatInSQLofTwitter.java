@@ -6,6 +6,7 @@
 package complementos;
 
 import com.csvreader.CsvReader;
+import complementos.SeparadorDiccionario.ModeloDiccionario;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -76,11 +77,16 @@ public class SaveSVGformatInSQLofTwitter {
         try{
             PreparedStatement my_statement = conet.prepareStatement(Query);
             PreparedStatement my_statement2 = conet.prepareStatement("INSERT INTO urlstwitter (urls_id,url,expanded_url,display_url) VALUES (?,?,?,?);");
+            SeparadorDiccionario separador = new SeparadorDiccionario();
+            ArrayList<ModeloDiccionario> diccionario = separador.getDic(urls);
+            
+            
+            
             for(int i = 0 ; i < data.size() ; i++){
                 my_statement2.setString(1, data.get(i).getUrlstwitter_urls_id());
-                my_statement2.setString(2, "hola");
-                my_statement2.setString(3, "hola");
-                my_statement2.setString(4, "hola");
+                my_statement2.setString(2, diccionario.get(0).getValor());
+                my_statement2.setString(3, diccionario.get(1).getValor());
+                my_statement2.setString(4, diccionario.get(2).getValor());
                 my_statement2.executeUpdate();
             }
             my_statement2.close();

@@ -1,5 +1,6 @@
 
 import complementos.SaveSVGformatInSQLofTwitter;
+import complementos.SeparadorDiccionario;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -58,8 +59,14 @@ public class JPPresentacion extends javax.swing.JPanel {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
+        
         SaveSVGformatInSQLofTwitter OBJ = new SaveSVGformatInSQLofTwitter("src/scriptPython/dataTwitter/FileName.csv");
         OBJ.start();
+        
+        /*
+        SeparadorDiccionario obj = new SeparadorDiccionario();
+        obj.getDic("[{'url': 'https://t.co/RxoAtdJIQE', 'expanded_url': 'https://cnn.it/3iYGe61', 'display_url': 'cnn.it/3iYGe61', 'indices': [91, 114]}]");
+        */
     }//GEN-LAST:event_jLabel2MouseClicked
 
 
