@@ -2,7 +2,6 @@
 import complementos.MySqlConnection;
 import java.awt.CardLayout;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,12 +25,13 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        estado = true;
         N_Intentos = 0;
         //Agregar laminal al contenedor principal cardLayout
         jPanelContenedor.setLayout(new java.awt.CardLayout(0,0));
         jPanelContenedor.add(new JPPresentacion(),idPresentacion);
         jPanelContenedor.add(new JPCreateUser(jPanelContenedor),idCrearUsuario);
-        
+        jPanelContenedor.add(new JPMenu(),idJPMenu);
         
         //Iniciar presentacion
         CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
@@ -89,6 +89,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Usurario:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
+        txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(180, 180, 180));
         txtUsuario.setText("INGRESAR USUARIO");
         txtUsuario.setBorder(null);
@@ -219,7 +220,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         // TODO add your handling code here:
-        if(N_Intentos < 3){
+        if(N_Intentos < 3 && estado){
             try {
                 // TODO add your handling code here:
                 //Se crea la coneccion 
@@ -240,10 +241,18 @@ public class Login extends javax.swing.JFrame {
                             *  ojo
                             *
                             */
+                            CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
+                            carta.show(jPanelContenedor, idJPMenu);
+                            estado = false;
+                            btnLogin.setEnabled(estado);
+                            lbCrearUser.setEnabled(estado);
+                            lbPasswordRecovery.setEnabled(estado);
+                            txtContrasena.setEnabled(estado);
+                            txtUsuario.setEnabled(estado);
                         }
                     }
                 }
-                if(this.isVisible() && N_Intentos < 3){
+                if(estado && N_Intentos < 3){
                     N_Intentos ++;
                     JOptionPane.showMessageDialog(null, "Intento: "+N_Intentos,"Inicio de seccion",JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -251,7 +260,8 @@ public class Login extends javax.swing.JFrame {
             } catch (SQLException e) {
                 System.out.println("Error: "+e.getMessage());
             }
-        }else{
+        }else if(estado){
+            System.out.println(estado);
             JOptionPane.showMessageDialog(null, "Ya no tiene mas intentos","Seccion Cerrada",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
@@ -339,7 +349,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
-    
+    private boolean estado;
     private int N_Intentos;
     private final String BaseDatos = "PROYECTOPPR";
     private final String Tabla = "REGISTROUSUARIO";
@@ -347,4 +357,5 @@ public class Login extends javax.swing.JFrame {
     private final static String idPresentacion = "laminaPresentacion";
     private final static String idFacebook = "laminaFacebook";
     private final static String idCrearUsuario = "laminaUserCreate";
+    private final static String idJPMenu = "laminaMenu";
 }
