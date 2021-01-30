@@ -16,16 +16,56 @@ public class ModeloTwitter {
     private String screen_name;
     private String name;
     private String account_creation_date;
-    private String urlstwitter_urls_id;
+    private String url;
+    private String expanded_url;
+    private String display_url;
+    private String Registrousuario_idUsuario;
 
-    public ModeloTwitter(String tweet_id, String created_at, String tweet_text, String screen_name, String name, String account_creation_date, String urlstwitter_urls_id) {
+    public ModeloTwitter(String tweet_id, String created_at, String tweet_text, String screen_name, String name, String account_creation_date, String url, String expanded_url, String display_url, String Registrousuario_idUsuario) {
         this.tweet_id = tweet_id;
         this.created_at = created_at;
         this.tweet_text = tweet_text;
         this.screen_name = screen_name;
         this.name = name;
         this.account_creation_date = account_creation_date;
-        this.urlstwitter_urls_id = urlstwitter_urls_id;
+        this.url = url;
+        this.expanded_url = expanded_url;
+        this.display_url = display_url;
+        this.Registrousuario_idUsuario = Registrousuario_idUsuario;
+    }
+
+    public String getRegistrousuario_idUsuario() {
+        return Registrousuario_idUsuario;
+    }
+
+    public void setRegistrousuario_idUsuario(String Registrousuario_idUsuario) {
+        this.Registrousuario_idUsuario = Registrousuario_idUsuario;
+    }
+
+    
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getExpanded_url() {
+        return expanded_url;
+    }
+
+    public void setExpanded_url(String expanded_url) {
+        this.expanded_url = expanded_url;
+    }
+
+    public String getDisplay_url() {
+        return display_url;
+    }
+
+    public void setDisplay_url(String display_url) {
+        this.display_url = display_url;
     }
 
     public String getTweet_id() {
@@ -75,14 +115,4 @@ public class ModeloTwitter {
     public void setAccount_creation_date(String account_creation_date) {
         this.account_creation_date = account_creation_date;
     }
-
-    public String getUrlstwitter_urls_id() {
-        return urlstwitter_urls_id;
-    }
-
-    public void setUrlstwitter_urls_id(String urlstwitter_urls_id) {
-        this.urlstwitter_urls_id = urlstwitter_urls_id;
-    }
-    
-    
 }

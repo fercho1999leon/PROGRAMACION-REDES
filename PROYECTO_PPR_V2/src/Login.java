@@ -27,11 +27,13 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         estado = true;
         N_Intentos = 0;
+        PanelMenu = new JPMenu(jPanelContenedor);
         //Agregar laminal al contenedor principal cardLayout
         jPanelContenedor.setLayout(new java.awt.CardLayout(0,0));
         jPanelContenedor.add(new JPPresentacion(),idPresentacion);
         jPanelContenedor.add(new JPCreateUser(jPanelContenedor),idCrearUsuario);
-        jPanelContenedor.add(new JPMenu(),idJPMenu);
+        jPanelContenedor.add(PanelMenu,idJPMenu);
+        jPanelContenedor.add(new JPBaseDeDatos(jPanelContenedor),idJPJPBaseDeDatos);
         
         //Iniciar presentacion
         CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
@@ -89,10 +91,19 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Usurario:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
+        txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
         txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(180, 180, 180));
         txtUsuario.setText("INGRESAR USUARIO");
         txtUsuario.setBorder(null);
+        txtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsuarioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUsuarioFocusLost(evt);
+            }
+        });
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 180, 30));
 
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
@@ -109,9 +120,18 @@ public class Login extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 220, 10));
 
+        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
         txtContrasena.setForeground(new java.awt.Color(180, 180, 180));
         txtContrasena.setText("jPasswordField1");
         txtContrasena.setBorder(null);
+        txtContrasena.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtContrasenaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtContrasenaFocusLost(evt);
+            }
+        });
         jPanel1.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 180, 30));
 
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -243,6 +263,7 @@ public class Login extends javax.swing.JFrame {
                             */
                             CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
                             carta.show(jPanelContenedor, idJPMenu);
+                            PanelMenu.setUsuarioLogin(my_resultSet.getString("idUsuario"));
                             estado = false;
                             btnLogin.setEnabled(estado);
                             lbCrearUser.setEnabled(estado);
@@ -294,6 +315,26 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_lbPasswordRecoveryMouseClicked
+
+    private void txtUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusGained
+        // TODO add your handling code here:
+        txtUsuario.setText("");
+    }//GEN-LAST:event_txtUsuarioFocusGained
+
+    private void txtUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusLost
+        // TODO add your handling code here:
+        if(txtUsuario.getText().equals(""))txtUsuario.setText("INGRESAR USUARIO");
+    }//GEN-LAST:event_txtUsuarioFocusLost
+
+    private void txtContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContrasenaFocusGained
+        // TODO add your handling code here:
+        txtContrasena.setText("");
+    }//GEN-LAST:event_txtContrasenaFocusGained
+
+    private void txtContrasenaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContrasenaFocusLost
+        // TODO add your handling code here:
+        if(txtContrasena.getText().equals(""))txtContrasena.setText("jPasswordField1");
+    }//GEN-LAST:event_txtContrasenaFocusLost
 
     /**
      * @param args the command line arguments
@@ -351,11 +392,11 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private boolean estado;
     private int N_Intentos;
-    private final String BaseDatos = "PROYECTOPPR";
     private final String Tabla = "REGISTROUSUARIO";
-    
+    private JPMenu PanelMenu;
     private final static String idPresentacion = "laminaPresentacion";
     private final static String idFacebook = "laminaFacebook";
     private final static String idCrearUsuario = "laminaUserCreate";
     private final static String idJPMenu = "laminaMenu";
+    private final static String idJPJPBaseDeDatos = "laminaShowBaseDatos";
 }

@@ -1,3 +1,7 @@
+
+import complementos.SaveSVGformatInSQLofTwitter;
+import java.awt.CardLayout;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,8 +17,17 @@ public class JPMenu extends javax.swing.JPanel {
     /**
      * Creates new form JPMenu
      */
-    public JPMenu() {
+    public JPMenu(javax.swing.JPanel contenedor) {
         initComponents();
+        this.contenedor=contenedor;
+    }
+
+    public String getUsuarioLogin() {
+        return UsuarioLogin;
+    }
+
+    public void setUsuarioLogin(String UsuarioLogin) {
+        this.UsuarioLogin = UsuarioLogin;
     }
 
     /**
@@ -26,12 +39,12 @@ public class JPMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbTwitter = new javax.swing.JLabel();
+        lbCargaBaseDatos = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbShowDataB = new javax.swing.JLabel();
+        lbImprimir = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -40,17 +53,23 @@ public class JPMenu extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(570, 360));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/twitter-100.png"))); // NOI18N
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 100, 100));
+        lbTwitter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTwitter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/twitter-100.png"))); // NOI18N
+        lbTwitter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbTwitter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbTwitterMouseClicked(evt);
+            }
+        });
+        add(lbTwitter, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 100, 100));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/upload-100.png"))); // NOI18N
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 100, 100));
+        lbCargaBaseDatos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCargaBaseDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/upload-100.png"))); // NOI18N
+        lbCargaBaseDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        add(lbCargaBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 100, 100));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/instagram-100.png"))); // NOI18N
@@ -62,15 +81,20 @@ public class JPMenu extends javax.swing.JPanel {
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 100, 100));
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/dataBase-100.png"))); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 100, 100));
+        lbShowDataB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbShowDataB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/dataBase-100.png"))); // NOI18N
+        lbShowDataB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbShowDataB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbShowDataBMouseClicked(evt);
+            }
+        });
+        add(lbShowDataB, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 100, 100));
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/print-95.png"))); // NOI18N
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 100, 100));
+        lbImprimir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/print-95.png"))); // NOI18N
+        lbImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        add(lbImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 100, 100));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(58, 180, 180));
@@ -103,19 +127,35 @@ public class JPMenu extends javax.swing.JPanel {
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 290, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lbShowDataBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbShowDataBMouseClicked
+        // TODO add your handling code here:
+        CardLayout carta = (CardLayout)contenedor.getLayout();
+        carta.show(contenedor, idJPJPBaseDeDatos);
+    }//GEN-LAST:event_lbShowDataBMouseClicked
+
+    private void lbTwitterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTwitterMouseClicked
+        // TODO add your handling code here:
+        SaveSVGformatInSQLofTwitter OBJ = new SaveSVGformatInSQLofTwitter("src/scriptPython/dataTwitter/FileName.csv");
+        OBJ.start(UsuarioLogin);
+    }//GEN-LAST:event_lbTwitterMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbCargaBaseDatos;
+    private javax.swing.JLabel lbImprimir;
+    private javax.swing.JLabel lbShowDataB;
+    private javax.swing.JLabel lbTwitter;
     // End of variables declaration//GEN-END:variables
+    private javax.swing.JPanel contenedor;
+    private final static String idJPJPBaseDeDatos = "laminaShowBaseDatos";
+    
+    private String UsuarioLogin;
 }
