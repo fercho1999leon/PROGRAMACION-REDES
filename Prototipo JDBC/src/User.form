@@ -64,6 +64,7 @@
               <Color blue="b4" green="b4" red="3a" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ADD USER"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -90,6 +91,7 @@
               <Color blue="b4" green="b4" red="3a" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="DELECT USER"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbDelectActionPerformed"/>
@@ -115,6 +117,7 @@
               <Color blue="b4" green="b4" red="3a" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="MODIFY"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbModifyActionPerformed"/>
@@ -140,6 +143,7 @@
               <Color blue="b4" green="b4" red="3a" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SHOW REPORT"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbShowReportActionPerformed"/>

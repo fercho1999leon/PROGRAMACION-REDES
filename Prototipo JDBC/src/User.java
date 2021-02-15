@@ -1,6 +1,8 @@
 
 import java.awt.CardLayout;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,16 +21,20 @@ public class User extends javax.swing.JFrame {
     public User() {
         initComponents();
         this.setLocationRelativeTo(null);
-        laminaAdd = new jpAdd();
+        my_connection = null;
+        
+        laminaAdd = new jpAdd("CREAR NUEVO USUARIO",new btnAddActionPerformed());
         laminaPresentacion = new jpPresentacion();
         laminaDelect = new jpDelectUser();
         laminaReport = new jpReport();
+        laminaModify = new jpAdd("MODIFICAR USUARIO",null);
         
         jpContentPrimary.setLayout(new CardLayout(0,0));
         jpContentPrimary.add(laminaPresentacion,idPresent);
         jpContentPrimary.add(laminaAdd,idAddUser);
         jpContentPrimary.add(laminaDelect,idDelect);
         jpContentPrimary.add(laminaReport,idReport);
+        jpContentPrimary.add(laminaModify,idModify);
     }
 
     /**
@@ -67,6 +73,7 @@ public class User extends javax.swing.JFrame {
         rbAdd.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         rbAdd.setForeground(new java.awt.Color(58, 180, 180));
         rbAdd.setText("ADD USER");
+        rbAdd.setEnabled(false);
         rbAdd.setFocusable(false);
         rbAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +87,7 @@ public class User extends javax.swing.JFrame {
         rbDelect.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         rbDelect.setForeground(new java.awt.Color(58, 180, 180));
         rbDelect.setText("DELECT USER");
+        rbDelect.setEnabled(false);
         rbDelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbDelectActionPerformed(evt);
@@ -92,6 +100,7 @@ public class User extends javax.swing.JFrame {
         rbModify.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         rbModify.setForeground(new java.awt.Color(58, 180, 180));
         rbModify.setText("MODIFY");
+        rbModify.setEnabled(false);
         rbModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbModifyActionPerformed(evt);
@@ -104,6 +113,7 @@ public class User extends javax.swing.JFrame {
         rbShowReport.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         rbShowReport.setForeground(new java.awt.Color(58, 180, 180));
         rbShowReport.setText("SHOW REPORT");
+        rbShowReport.setEnabled(false);
         rbShowReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbShowReportActionPerformed(evt);
@@ -182,9 +192,43 @@ public class User extends javax.swing.JFrame {
 
     private void btnSqlConetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSqlConetActionPerformed
         // TODO add your handling code here:
+        try{
+            my_connection = DriverManager.getConnection(url, user, password);
+            btnSqlConet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/sql-verde-120.png")));
+            btnSqlConet.setForeground(new java.awt.Color(68, 209, 125));
+            rbAdd.setEnabled(true);
+            rbDelect.setEnabled(true);
+            rbModify.setEnabled(true);
+            rbShowReport.setEnabled(true);
+        }catch(SQLException e){
+            System.out.println("Error btnSqlConetActionPerformed: "+e.getMessage());
+            btnSqlConet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/sql-rojo-120.png")));
+            btnSqlConet.setForeground(new java.awt.Color(228, 102, 116));
+        }
         
     }//GEN-LAST:event_btnSqlConetActionPerformed
 
+    class btnAddActionPerformed implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(my_connection != null){
+                int DNI = Integer.parseInt(laminaAdd.getTxtDNI().getText());
+                String Nombre = laminaAdd.getTxtNombre().getText();
+                String Apellido = laminaAdd.getTxtApellido().getText();
+                int Edad = Integer.parseInt(laminaAdd.getTxtEdad().getText());
+                try {
+                    PreparedStatement insert = my_connection.prepareStatement("INSERT INTO USER VALUES (?,?,?,?);");
+                    insert.setInt(1, DNI);
+                    insert.setString(2, Nombre);
+                    insert.setString(3, Apellido);
+                    insert.setInt(4, Edad);
+                    insert.executeUpdate();
+                } catch (SQLException ex) {
+                    System.out.println("Error btnAddActionPerformed: "+ex.getMessage());
+                }
+            }
+        }
+    }
+    
     private void btnSqlConetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSqlConetMouseEntered
         // TODO add your handling code here:
         btnSqlConet.setText("CONET");
@@ -197,6 +241,13 @@ public class User extends javax.swing.JFrame {
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         // TODO add your handling code here:
+        if(my_connection != null){
+            try {
+                my_connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error my_connection close: "+ex.getMessage());
+            }
+        }
         System.exit(0);
     }//GEN-LAST:event_btnCerrarActionPerformed
 
@@ -221,7 +272,7 @@ public class User extends javax.swing.JFrame {
     private void rbModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbModifyActionPerformed
         // TODO add your handling code here:
         CardLayout carta = (CardLayout)jpContentPrimary.getLayout();
-        carta.show(jpContentPrimary, idAddUser);
+        carta.show(jpContentPrimary, idModify);
     }//GEN-LAST:event_rbModifyActionPerformed
 
     /**
@@ -278,10 +329,19 @@ public class User extends javax.swing.JFrame {
     private final static String idPresent = "laminaPresentacion";
     private final static String idDelect = "laminaDelected";
     private final static String idReport = "laminaReporte";
+    private final static String idModify = "laminaModificacion";
     
     
     private jpAdd laminaAdd;
+    private jpAdd laminaModify;
     private jpPresentacion laminaPresentacion;
     private jpDelectUser laminaDelect;
     private jpReport laminaReport;
+    
+    private Connection my_connection;
+    private final static String baseDatos = "jdbc";
+    private final static String hostname = "localhost";
+    private final static String url = "jdbc:mysql://"+hostname+":3306/"+baseDatos+"?serverTimezone=UTC";
+    private final static String user = "PROYECTO_PPR";
+    private final static String password = "Fernando1999";
 }
