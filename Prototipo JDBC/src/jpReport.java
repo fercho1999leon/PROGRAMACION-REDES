@@ -1,3 +1,12 @@
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,6 +25,28 @@ public class jpReport extends javax.swing.JPanel {
     public jpReport() {
         initComponents();
     }
+    public void StartTable(Connection conet){
+        modelTable = new DefaultTableModel();
+        String columns [] = {"DNI","NOMBRES","APELLIDOS","EDAD"};
+        modelTable.setColumnIdentifiers(columns);
+        String QUERRY = "SELECT * FROM user";
+        try {
+            Statement my_statement = conet.createStatement();
+            ResultSet my_resultSet = my_statement.executeQuery(QUERRY);
+            modelTable.setRowCount(0);
+            Object o[] = new Object[modelTable.getColumnCount()];
+            while(my_resultSet.next()){
+                o[0]=String.valueOf(my_resultSet.getInt("DNI"));
+                o[1]=my_resultSet.getString("NAME");
+                o[2]=my_resultSet.getString("LASTNAME");
+                o[3]=String.valueOf(my_resultSet.getInt("AGE"));
+                modelTable.addRow(o);
+            }
+            jtShow.setModel(modelTable);
+        } catch (SQLException ex) {
+            Logger.getLogger(jpReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,7 +59,7 @@ public class jpReport extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtShow = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -36,8 +67,8 @@ public class jpReport extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/back-40.png"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtShow.setBackground(new java.awt.Color(255, 255, 255));
+        jtShow.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,7 +90,7 @@ public class jpReport extends javax.swing.JPanel {
                 "DNI", "NOMBRE", "APELLIDO", "EDAD"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtShow);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 480, 280));
     }// </editor-fold>//GEN-END:initComponents
@@ -68,6 +99,7 @@ public class jpReport extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jtShow;
     // End of variables declaration//GEN-END:variables
+    private DefaultTableModel modelTable;
 }

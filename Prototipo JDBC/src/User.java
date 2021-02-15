@@ -267,6 +267,7 @@ public class User extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout carta = (CardLayout)jpContentPrimary.getLayout();
         carta.show(jpContentPrimary, idReport);
+        laminaReport.StartTable(my_connection);
     }//GEN-LAST:event_rbShowReportActionPerformed
 
     private void rbModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbModifyActionPerformed
