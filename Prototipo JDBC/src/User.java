@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
  */
 public class User extends javax.swing.JFrame {
 
-    private static Object sentencia;
-
     /**
      * Creates new form User
      */
@@ -262,14 +260,23 @@ public class User extends javax.swing.JFrame {
 
     private void rbDelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDelectActionPerformed
         // TODO add your handling code here:
-        String Nombre = enombre.getText();
-        int resp = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro:" +Nombre);
-        if (resp==JOptionPanel.YES_OPTION) {
-        Consulta_Conexion.eliminar_registro(Nombre);
-        }     
+         if(my_connection != null){
+                int DNI = Integer.parseInt(laminaDelect.getjTextDNI().getText());
+                try {
+                    PreparedStatement insert = my_connection.prepareStatement("INSERT INTO USER VALUES (?);");
+                    insert.setInt(1, DNI);
+                    int resp = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro:" +DNI);
+                    if (resp==JOptionPane.YES_OPTION) {
+                    Consulta_Conexion.eliminar_registro(DNI);
+                    }
+                    insert.executeUpdate();
+                } catch (SQLException ex) {
+                    System.out.println("Error btnAddActionPerformed: "+ex.getMessage());
+              }
        
         CardLayout carta = (CardLayout)jpContentPrimary.getLayout();
         carta.show(jpContentPrimary, idDelect);
+         }
     }//GEN-LAST:event_rbDelectActionPerformed
     
     
@@ -355,4 +362,4 @@ public class User extends javax.swing.JFrame {
     private final static String url = "jdbc:mysql://"+hostname+":3306/"+baseDatos+"?serverTimezone=UTC";
     private final static String user = "PROYECTO_PPR";
     private final static String password = "Fernando1999";
-}
+ }

@@ -11,7 +11,7 @@ import java.sql.*;
  */
 public class Consulta_Conexion {
     static Statement sentencia;
-    
+      static ResultSet resultado;
     
     //METODO EJECUTAR
     public static void ejecutar(String c) { 
@@ -24,9 +24,24 @@ public class Consulta_Conexion {
     }
     
     //METODO ELIMINAR
-    public static  void eliminar_registro (String Nombre) {
-        String c = "DELETE FROM Datos WHERE Nombre = '"+Nombre+"'"; 
+    public static  void eliminar_registro (int DNI) {
+        String c = "DELETE FROM jdbc WHERE Nombre = '"+DNI+"'"; 
         ejecutar(c ); 
     }
     
-}
+    
+    //METODO BUSCAR REGISTRO
+    public static User buscar_registro(int DNI) {
+        User u = null; 
+        String c = "SELECT * FROM jdbc" + "WHERE Nombre='"+DNI+"'";
+        try{
+            resultado = sentencia.executeQuery(c);
+            System.out.println("BUSQUEDA ENCONTRADA");
+        } catch (Exception e){
+            System.out.println("BUSQUEDA NO ENCONTRADA");
+        } 
+            return u;
+      }    
+    }
+    
+

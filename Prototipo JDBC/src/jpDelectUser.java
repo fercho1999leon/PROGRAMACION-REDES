@@ -1,3 +1,7 @@
+
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,7 +20,17 @@ public class jpDelectUser extends javax.swing.JPanel {
     public jpDelectUser() {
         initComponents();
     }
+   
+   
+    public JTextField getjTextDNI() {
+        return jTextField1;
+    }
 
+    public void setjTextDNI(JTextField jTextField1) {
+        this.jTextField1 = jTextField1;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +57,6 @@ public class jpDelectUser extends javax.swing.JPanel {
         jLabel1.setText("ELIMINAR:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 90, 30));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setText("INGRESE DNI");
@@ -56,7 +69,6 @@ public class jpDelectUser extends javax.swing.JPanel {
         jButton1.setContentAreaFilled(false);
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 30, 30));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
