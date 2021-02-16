@@ -3,6 +3,7 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import javax.swing.JOptionPane;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -261,32 +262,15 @@ public class User extends javax.swing.JFrame {
 
     private void rbDelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDelectActionPerformed
         // TODO add your handling code here:
-        string Nombre = enombre.getText();
-        int resp = JOptionPanel.showConfirmDialog(null, “Desea eliminar este registro:” +Nombre);
+        String Nombre = enombre.getText();
+        int resp = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro:" +Nombre);
         if (resp==JOptionPanel.YES_OPTION) {
-        my_connection.eliminar_registro(Nombre);
+        Consulta_Conexion.eliminar_registro(Nombre);
         }     
- 
-        
+       
         CardLayout carta = (CardLayout)jpContentPrimary.getLayout();
         carta.show(jpContentPrimary, idDelect);
     }//GEN-LAST:event_rbDelectActionPerformed
-    //METODO ELIMINAR
-    public static  void eliminar_registro (String Nombre) {
-        string c = “DELETE FROM Datos WHERE Nombre = '“+Nombre”'“; 
-        ejecutar(c ); 
-    }
-    //METODO EJECUTAR
-    public static void ejecutar(String c) { 
-        try {
-            sentencia.executeUpdate(c);
-            System.out.println(“CORRECTO”);
-        } catch (Exception e) { 
-	System.out.println(“ERROR”);
-	}
-    }
-}
-
     
     
     private void rbShowReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbShowReportActionPerformed
