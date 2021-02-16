@@ -23,7 +23,8 @@ public class User extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         my_connection = null;
-        
+        new btnModiActionPerformed();
+                
         laminaAdd = new jpAdd("CREAR NUEVO USUARIO",new btnAddActionPerformed());
         laminaPresentacion = new jpPresentacion();
         laminaDelect = new jpDelectUser();
@@ -229,6 +230,30 @@ public class User extends javax.swing.JFrame {
             }
         }
     }
+    
+    
+    class btnModiActionPerformed implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(my_connection != null){
+                int DNI = Integer.parseInt(laminaModify.getTxtDNI().getText());
+                String Nombre = laminaModify.getTxtNombre().getText();
+                String Apellido = laminaModify.getTxtApellido().getText();
+                int Edad = Integer.parseInt(laminaModify.getTxtEdad().getText());
+                try {
+                    PreparedStatement insert = my_connection.prepareStatement("UPDATE USER SET NAME=?, LASTNAME=?, AGE=? WHERE DNI=?;");
+                    insert.setString(1, Nombre);
+                    insert.setString(2, Apellido);
+                    insert.setInt(3, Edad);
+                    insert.setInt(4, DNI);
+                    insert.executeUpdate();
+                     
+                } catch (SQLException ex) {
+                    System.out.println("Error btnModiActionPerformed: "+ex.getMessage());
+                }
+            }
+        }
+    }
+    
     
     private void btnSqlConetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSqlConetMouseEntered
         // TODO add your handling code here:
