@@ -1,6 +1,10 @@
 
-import javax.swing.JFormattedTextField;
+
+import java.awt.event.ActionListener;
 import javax.swing.JTextField;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.logging.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,8 +21,9 @@ public class jpDelectUser extends javax.swing.JPanel {
     /**
      * Creates new form jpDelectUser
      */
-    public jpDelectUser() {
+   public jpDelectUser(String titulo,ActionListener event) {
         initComponents();
+        jButton1.addActionListener(event);
     }
    
    
@@ -30,6 +35,32 @@ public class jpDelectUser extends javax.swing.JPanel {
         this.jTextField1 = jTextField1;
     }
 
+    public void PEliminar(Connection conet){
+        String DNI = jTextField1.getText();
+        modelTable = new DefaultTableModel();
+        String columns [] = {"DNI","NOMBRES","APELLIDOS","EDAD"};
+        modelTable.setColumnIdentifiers(columns);
+        String QUERRY = "SELECT * FROM user";
+        try {
+            Statement my_statement = conet.createStatement();
+            ResultSet my_resultSet = my_statement.executeQuery(QUERRY);
+            modelTable.setRowCount(0);
+            Object o[] = new Object[modelTable.getColumnCount()];
+            while(my_resultSet.next()){
+                o[0]=String.valueOf(my_resultSet.getInt("DNI"));
+                o[1]=my_resultSet.getString("NAME");
+                o[2]=my_resultSet.getString("LASTNAME");
+                o[3]=String.valueOf(my_resultSet.getInt("AGE"));
+                modelTable.addRow(o);
+            }
+            jTable1.setModel(modelTable);
+        } catch (SQLException ex) {
+            Logger.getLogger(jpReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,4 +143,6 @@ public class jpDelectUser extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+    private DefaultTableModel modelTable;
+    
 }

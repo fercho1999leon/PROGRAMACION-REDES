@@ -23,13 +23,13 @@ public class User extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         my_connection = null;
-        new btnModiActionPerformed();
+        
                 
         laminaAdd = new jpAdd("CREAR NUEVO USUARIO",new btnAddActionPerformed());
         laminaPresentacion = new jpPresentacion();
-        laminaDelect = new jpDelectUser();
+        laminaDelect = new jpDelectUser("ELIMINAR",new btnDeletActionPerformed());
         laminaReport = new jpReport();
-        laminaModify = new jpAdd("MODIFICAR USUARIO",null);
+        laminaModify = new jpAdd("MODIFICAR USUARIO",new btnModiActionPerformed());
         
         jpContentPrimary.setLayout(new CardLayout(0,0));
         jpContentPrimary.add(laminaPresentacion,idPresent);
@@ -255,6 +255,22 @@ public class User extends javax.swing.JFrame {
     }
     
     
+    class btnDeletActionPerformed implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(my_connection != null){
+                int DNI = Integer.parseInt(laminaDelect.getjTextDNI().getText());
+                try {
+                    PreparedStatement insert = my_connection.prepareStatement("DELETE FROM user WHERE DNI=?;");
+                    insert.setInt(1, DNI);
+                    insert.executeUpdate();
+                     
+                } catch (SQLException ex) {
+                    System.out.println("Error btnModiActionPerformed: "+ex.getMessage());
+                }
+            }
+        }
+    }
+    
     private void btnSqlConetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSqlConetMouseEntered
         // TODO add your handling code here:
         btnSqlConet.setText("CONET");
@@ -285,23 +301,9 @@ public class User extends javax.swing.JFrame {
 
     private void rbDelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDelectActionPerformed
         // TODO add your handling code here:
-         if(my_connection != null){
-                int DNI = Integer.parseInt(laminaDelect.getjTextDNI().getText());
-                try {
-                    PreparedStatement insert = my_connection.prepareStatement("INSERT INTO USER VALUES (?);");
-                    insert.setInt(1, DNI);
-                    int resp = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro:" +DNI);
-                    if (resp==JOptionPane.YES_OPTION) {
-                    Consulta_Conexion.eliminar_registro(DNI);
-                    }
-                    insert.executeUpdate();
-                } catch (SQLException ex) {
-                    System.out.println("Error btnAddActionPerformed: "+ex.getMessage());
-              }
-       
         CardLayout carta = (CardLayout)jpContentPrimary.getLayout();
         carta.show(jpContentPrimary, idDelect);
-         }
+        laminaDelect.PEliminar(my_connection);
     }//GEN-LAST:event_rbDelectActionPerformed
     
     
