@@ -15,6 +15,8 @@ import java.sql.*;
  */
 public class User extends javax.swing.JFrame {
 
+    private static Object sentencia;
+
     /**
      * Creates new form User
      */
@@ -259,10 +261,34 @@ public class User extends javax.swing.JFrame {
 
     private void rbDelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDelectActionPerformed
         // TODO add your handling code here:
+        string Nombre = enombre.getText();
+        int resp = JOptionPanel.showConfirmDialog(null, “Desea eliminar este registro:” +Nombre);
+        if (resp==JOptionPanel.YES_OPTION) {
+        my_connection.eliminar_registro(Nombre);
+        }     
+ 
+        
         CardLayout carta = (CardLayout)jpContentPrimary.getLayout();
         carta.show(jpContentPrimary, idDelect);
     }//GEN-LAST:event_rbDelectActionPerformed
+    //METODO ELIMINAR
+    public static  void eliminar_registro (String Nombre) {
+        string c = “DELETE FROM Datos WHERE Nombre = '“+Nombre”'“; 
+        ejecutar(c ); 
+    }
+    //METODO EJECUTAR
+    public static void ejecutar(String c) { 
+        try {
+            sentencia.executeUpdate(c);
+            System.out.println(“CORRECTO”);
+        } catch (Exception e) { 
+	System.out.println(“ERROR”);
+	}
+    }
+}
 
+    
+    
     private void rbShowReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbShowReportActionPerformed
         // TODO add your handling code here:
         CardLayout carta = (CardLayout)jpContentPrimary.getLayout();
