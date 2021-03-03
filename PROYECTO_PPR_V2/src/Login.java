@@ -28,12 +28,14 @@ public class Login extends javax.swing.JFrame {
         estado = true;
         N_Intentos = 0;
         PanelMenu = new JPMenu(jPanelContenedor);
+        JPBtnTwitter = new GuiBtnTwitter(jPanelContenedor);
         //Agregar laminal al contenedor principal cardLayout
         jPanelContenedor.setLayout(new java.awt.CardLayout(0,0));
         jPanelContenedor.add(new JPPresentacion(),idPresentacion);
         jPanelContenedor.add(new JPCreateUser(jPanelContenedor),idCrearUsuario);
         jPanelContenedor.add(PanelMenu,idJPMenu);
         jPanelContenedor.add(new JPBaseDeDatos(jPanelContenedor),idJPJPBaseDeDatos);
+        jPanelContenedor.add(JPBtnTwitter,idJPBtnTwitter);
         
         //Iniciar presentacion
         CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
@@ -234,8 +236,10 @@ public class Login extends javax.swing.JFrame {
 
     private void lbCrearUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearUserMouseClicked
         // TODO add your handling code here:
-        CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
-        carta.show(jPanelContenedor, idCrearUsuario);
+        if(estado){
+            CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
+            carta.show(jPanelContenedor, idCrearUsuario);
+        }
     }//GEN-LAST:event_lbCrearUserMouseClicked
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
@@ -263,7 +267,8 @@ public class Login extends javax.swing.JFrame {
                             */
                             CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
                             carta.show(jPanelContenedor, idJPMenu);
-                            PanelMenu.setUsuarioLogin(my_resultSet.getString("idUsuario"));
+                            //PanelMenu.setUsuarioLogin(my_resultSet.getString("idUsuario"));
+                            JPBtnTwitter.setUsuarioLogin(my_resultSet.getString("idUsuario"));
                             estado = false;
                             btnLogin.setEnabled(estado);
                             lbCrearUser.setEnabled(estado);
@@ -291,27 +296,29 @@ public class Login extends javax.swing.JFrame {
     private void lbPasswordRecoveryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPasswordRecoveryMouseClicked
         // TODO add your handling code here:
         boolean Bandera = false;
-        String in = JOptionPane.showInputDialog(lbPasswordRecovery,"INGRESE EL CORREO.","RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.QUESTION_MESSAGE);
-        if(in!=null){
-            try {
-                //Se crea la coneccion
-                Connection my_connection = (new MySqlConnection().conetMysql());//PONER LA BASE DE DATOS(proyecto_ppr)
-                //Se crea objeto del tipo statement
-                Statement my_statement = my_connection.createStatement();
-                //Ejecutar sentencia Sql
-                ResultSet my_resultSet = my_statement.executeQuery("SELECT * FROM "+Tabla);//SE PONE LA TABLA DE USUARIOS (usuario)
-                //Recorrer resultset
-                while(my_resultSet.next()){
-                    if(my_resultSet.getString("correoUsuario").equals(in)){
-                        JOptionPane.showMessageDialog(null, "SU USUARIO ES: "+my_resultSet.getString("users")+"\nSU CONTRASEÑA ES: "+my_resultSet.getString("contraseniaUsuario"),"RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
-                        Bandera = true;
-                        break;
+        if(estado){
+            String in = JOptionPane.showInputDialog(lbPasswordRecovery,"INGRESE EL CORREO.","RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.QUESTION_MESSAGE);
+            if(in!=null){
+                try {
+                    //Se crea la coneccion
+                    Connection my_connection = (new MySqlConnection().conetMysql());//PONER LA BASE DE DATOS(proyecto_ppr)
+                    //Se crea objeto del tipo statement
+                    Statement my_statement = my_connection.createStatement();
+                    //Ejecutar sentencia Sql
+                    ResultSet my_resultSet = my_statement.executeQuery("SELECT * FROM "+Tabla);//SE PONE LA TABLA DE USUARIOS (usuario)
+                    //Recorrer resultset
+                    while(my_resultSet.next()){
+                        if(my_resultSet.getString("correoUsuario").equals(in)){
+                            JOptionPane.showMessageDialog(null, "SU USUARIO ES: "+my_resultSet.getString("users")+"\nSU CONTRASEÑA ES: "+my_resultSet.getString("contraseniaUsuario"),"RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
+                            Bandera = true;
+                            break;
+                        }
                     }
+                    if(!Bandera)JOptionPane.showMessageDialog(null, "CORREO NO ENCONTRADO","RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
+                    my_connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Error: "+e.getMessage());
                 }
-                if(!Bandera)JOptionPane.showMessageDialog(null, "CORREO NO ENCONTRADO","RECUPERACION DE CONTRASEÑA Y USUARIO",JOptionPane.INFORMATION_MESSAGE);
-                my_connection.close();
-            } catch (SQLException e) {
-                System.out.println("Error: "+e.getMessage());
             }
         }
     }//GEN-LAST:event_lbPasswordRecoveryMouseClicked
@@ -394,9 +401,11 @@ public class Login extends javax.swing.JFrame {
     private int N_Intentos;
     private final String Tabla = "REGISTROUSUARIO";
     private JPMenu PanelMenu;
+    private GuiBtnTwitter JPBtnTwitter;
     private final static String idPresentacion = "laminaPresentacion";
     private final static String idFacebook = "laminaFacebook";
     private final static String idCrearUsuario = "laminaUserCreate";
     private final static String idJPMenu = "laminaMenu";
     private final static String idJPJPBaseDeDatos = "laminaShowBaseDatos";
+    private final static String idJPBtnTwitter = "laminaBtnTwitter";
 }
