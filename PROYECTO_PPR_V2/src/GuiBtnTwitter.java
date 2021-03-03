@@ -99,8 +99,8 @@ public class GuiBtnTwitter extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(58, 180, 180));
-        jLabel3.setText("Ususraio");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, 30));
+        jLabel3.setText("Usuario");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, 30));
 
         spItens.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
         spItens.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
