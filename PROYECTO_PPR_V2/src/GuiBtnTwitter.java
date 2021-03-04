@@ -1,5 +1,5 @@
 
-import complementos.RunJavaAndPython;
+import complementos.RunJavaAndPythonTwitter;
 import complementos.SaveSVGformatInSQLofTwitter;
 import java.awt.CardLayout;
 import java.io.BufferedReader;
@@ -54,7 +54,7 @@ public class GuiBtnTwitter extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         lbMessengerScrip = new javax.swing.JLabel();
         lbMessengerBD = new javax.swing.JLabel();
-        btnRunTuwwiter = new javax.swing.JButton();
+        btnRunTwitter = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -119,38 +119,38 @@ public class GuiBtnTwitter extends javax.swing.JPanel {
         lbMessengerBD.setText("Guardando en Base de Datos");
         add(lbMessengerBD, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, -1, 20));
 
-        btnRunTuwwiter.setBackground(new java.awt.Color(255, 255, 255));
-        btnRunTuwwiter.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnRunTuwwiter.setForeground(new java.awt.Color(102, 102, 102));
-        btnRunTuwwiter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mine-50.png"))); // NOI18N
-        btnRunTuwwiter.setBorderPainted(false);
-        btnRunTuwwiter.setContentAreaFilled(false);
-        btnRunTuwwiter.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRunTwitter.setBackground(new java.awt.Color(255, 255, 255));
+        btnRunTwitter.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnRunTwitter.setForeground(new java.awt.Color(102, 102, 102));
+        btnRunTwitter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mine-50.png"))); // NOI18N
+        btnRunTwitter.setBorderPainted(false);
+        btnRunTwitter.setContentAreaFilled(false);
+        btnRunTwitter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRunTuwwiterMouseEntered(evt);
+                btnRunTwitterMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRunTuwwiterMouseExited(evt);
+                btnRunTwitterMouseExited(evt);
             }
         });
-        btnRunTuwwiter.addActionListener(new java.awt.event.ActionListener() {
+        btnRunTwitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRunTuwwiterActionPerformed(evt);
+                btnRunTwitterActionPerformed(evt);
             }
         });
-        add(btnRunTuwwiter, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 120, 50));
+        add(btnRunTwitter, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 120, 50));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 210, 10));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRunTuwwiterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunTuwwiterMouseEntered
+    private void btnRunTwitterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunTwitterMouseEntered
         // TODO add your handling code here:
-        btnRunTuwwiter.setText("Run");
-    }//GEN-LAST:event_btnRunTuwwiterMouseEntered
+        btnRunTwitter.setText("Run");
+    }//GEN-LAST:event_btnRunTwitterMouseEntered
 
-    private void btnRunTuwwiterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunTuwwiterMouseExited
+    private void btnRunTwitterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunTwitterMouseExited
         // TODO add your handling code here:
-        btnRunTuwwiter.setText("");
-    }//GEN-LAST:event_btnRunTuwwiterMouseExited
+        btnRunTwitter.setText("");
+    }//GEN-LAST:event_btnRunTwitterMouseExited
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -172,11 +172,11 @@ public class GuiBtnTwitter extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtUsuarioTwitterFocusLost
 
-    private void btnRunTuwwiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunTuwwiterActionPerformed
+    private void btnRunTwitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunTwitterActionPerformed
         // TODO add your handling code here:
         String name = txtUsuarioTwitter.getText();
         String itens = String.valueOf((int)spItens.getValue());
-        RunJavaAndPython obj = new RunJavaAndPython(9999,name,itens);
+        RunJavaAndPythonTwitter obj = new RunJavaAndPythonTwitter(9999,name,itens);
         Runnable contPython = obj;
         Thread hilo = new Thread(contPython);
         hilo.start();
@@ -201,12 +201,12 @@ public class GuiBtnTwitter extends javax.swing.JPanel {
         SaveSVGformatInSQLofTwitter OBJ = new SaveSVGformatInSQLofTwitter("src/scriptPython/data/Twitter.csv");
         OBJ.start(UsuarioLogin);
         lbMessengerBD.setForeground(new java.awt.Color(96,229,117));
-    }//GEN-LAST:event_btnRunTuwwiterActionPerformed
+    }//GEN-LAST:event_btnRunTwitterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnRunTuwwiter;
+    private javax.swing.JButton btnRunTwitter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
