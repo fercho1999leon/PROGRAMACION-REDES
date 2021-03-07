@@ -32,8 +32,8 @@ public class JPMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         lbTwitter = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbInstagram = new javax.swing.JLabel();
+        lbFacebook = new javax.swing.JLabel();
         lbShowDataB = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -54,15 +54,25 @@ public class JPMenu extends javax.swing.JPanel {
         });
         add(lbTwitter, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 100, 100));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/instagram-100.png"))); // NOI18N
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 100, 100));
+        lbInstagram.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbInstagram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/instagram-100.png"))); // NOI18N
+        lbInstagram.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbInstagram.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbInstagramMouseClicked(evt);
+            }
+        });
+        add(lbInstagram, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 100, 100));
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/facebook-100.png"))); // NOI18N
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 100, 100));
+        lbFacebook.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbFacebook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/facebook-100.png"))); // NOI18N
+        lbFacebook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbFacebook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbFacebookMouseClicked(evt);
+            }
+        });
+        add(lbFacebook, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 100, 100));
 
         lbShowDataB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbShowDataB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/dataBase-100.png"))); // NOI18N
@@ -112,18 +122,32 @@ public class JPMenu extends javax.swing.JPanel {
         */
     }//GEN-LAST:event_lbTwitterMouseClicked
 
+    private void lbInstagramMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbInstagramMouseClicked
+        // TODO add your handling code here:
+        CardLayout carta = (CardLayout)contenedor.getLayout();
+        carta.show(contenedor, idJPBtnInstagram);
+    }//GEN-LAST:event_lbInstagramMouseClicked
+
+    private void lbFacebookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFacebookMouseClicked
+        // TODO add your handling code here:
+        CardLayout carta = (CardLayout)contenedor.getLayout();
+        carta.show(contenedor, idJPBtnFacebook);
+    }//GEN-LAST:event_lbFacebookMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lbFacebook;
+    private javax.swing.JLabel lbInstagram;
     private javax.swing.JLabel lbShowDataB;
     private javax.swing.JLabel lbTwitter;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JPanel contenedor;
     private final static String idJPJPBaseDeDatos = "laminaShowBaseDatos";
     private final static String idJPBtnTwitter = "laminaBtnTwitter";
+    private final static String idJPBtnFacebook = "laminaBtnFacebook";
+    private final static String idJPBtnInstagram = "laminaBtnInstagram";
 }

@@ -1,5 +1,10 @@
 
+import complementos.RunJavaAndPython;
+import complementos.SaveSVGformatInSQLofFacebook;
 import java.awt.CardLayout;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -97,6 +102,11 @@ public class GuiBtnFacebook extends javax.swing.JPanel {
                 btnRunFacebookMouseExited(evt);
             }
         });
+        btnRunFacebook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRunFacebookActionPerformed(evt);
+            }
+        });
         add(btnRunFacebook, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 120, 50));
 
         btnBack.setBackground(new java.awt.Color(255, 255, 255));
@@ -122,9 +132,17 @@ public class GuiBtnFacebook extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 100, 100));
     }// </editor-fold>//GEN-END:initComponents
 
+    public String getUsuarioLogin() {
+        return UsuarioLogin;
+    }
+
+    public void setUsuarioLogin(String UsuarioLogin) {
+        this.UsuarioLogin = UsuarioLogin;
+    }
+
     private void txtUsuarioFacebookFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFacebookFocusGained
         // TODO add your handling code here:
-        if(txtUsuarioFacebook.getText().equals("Ingrese Usuario a Buscar")){
+        if(txtUsuarioFacebook.getText().equals("Ingrese Grupo a Buscar")){
             txtUsuarioFacebook.setText("");
         }
     }//GEN-LAST:event_txtUsuarioFacebookFocusGained
@@ -151,6 +169,40 @@ public class GuiBtnFacebook extends javax.swing.JPanel {
         CardLayout carta = (CardLayout)contenedor.getLayout();
         carta.show(contenedor, idJPMenu);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnRunFacebookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunFacebookActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        String name = txtUsuarioFacebook.getText();
+        String itens = String.valueOf((int)spItens.getValue());
+        RunJavaAndPython obj = new RunJavaAndPython(9999,name,itens);
+        Runnable contPython = obj;
+        Thread hilo = new Thread(contPython);
+        hilo.start();
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c py src/scriptPython/FACEBOOK.py");
+            lbMessengerScrip.setForeground(new java.awt.Color(96,229,117));
+            InputStream is = p.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String aux = br.readLine();
+            while (aux != null) {
+                // Se escribe la linea en pantalla
+                System.out.println(aux);
+
+                // y se lee la siguiente.
+                aux = br.readLine();
+            }
+            //Thread.sleep(1000);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            System.out.println(e.getMessage());
+        }
+        
+        SaveSVGformatInSQLofFacebook OBJ = new SaveSVGformatInSQLofFacebook("src/scriptPython/data/Facebook.csv");
+        OBJ.start(UsuarioLogin);
+        lbMessengerBD.setForeground(new java.awt.Color(96,229,117));
+        
+    }//GEN-LAST:event_btnRunFacebookActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

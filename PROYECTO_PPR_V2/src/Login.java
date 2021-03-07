@@ -29,6 +29,8 @@ public class Login extends javax.swing.JFrame {
         N_Intentos = 0;
         PanelMenu = new JPMenu(jPanelContenedor);
         JPBtnTwitter = new GuiBtnTwitter(jPanelContenedor);
+        JPBtnFacebook = new GuiBtnFacebook(jPanelContenedor);
+        JPBtnInstagram = new GuiBtnInstagram (jPanelContenedor);
         //Agregar laminal al contenedor principal cardLayout
         jPanelContenedor.setLayout(new java.awt.CardLayout(0,0));
         jPanelContenedor.add(new JPPresentacion(),idPresentacion);
@@ -36,6 +38,8 @@ public class Login extends javax.swing.JFrame {
         jPanelContenedor.add(PanelMenu,idJPMenu);
         jPanelContenedor.add(new JPBaseDeDatos(jPanelContenedor),idJPJPBaseDeDatos);
         jPanelContenedor.add(JPBtnTwitter,idJPBtnTwitter);
+        jPanelContenedor.add(JPBtnFacebook,idJPBtnFacebook);
+        jPanelContenedor.add(JPBtnInstagram,idJPBtnInstagram);
         
         //Iniciar presentacion
         CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
@@ -268,7 +272,10 @@ public class Login extends javax.swing.JFrame {
                             CardLayout carta = (CardLayout)jPanelContenedor.getLayout();
                             carta.show(jPanelContenedor, idJPMenu);
                             //PanelMenu.setUsuarioLogin(my_resultSet.getString("idUsuario"));
-                            JPBtnTwitter.setUsuarioLogin(my_resultSet.getString("idUsuario"));
+                            String id_user = my_resultSet.getString("idUsuario");
+                            JPBtnTwitter.setUsuarioLogin(id_user);
+                            JPBtnFacebook.setUsuarioLogin(id_user);
+                            JPBtnInstagram.setUsuarioLogin(id_user);
                             estado = false;
                             btnLogin.setEnabled(estado);
                             lbCrearUser.setEnabled(estado);
@@ -402,10 +409,15 @@ public class Login extends javax.swing.JFrame {
     private final String Tabla = "REGISTROUSUARIO";
     private JPMenu PanelMenu;
     private GuiBtnTwitter JPBtnTwitter;
+    private GuiBtnFacebook JPBtnFacebook;
+    private GuiBtnInstagram JPBtnInstagram;
     private final static String idPresentacion = "laminaPresentacion";
     private final static String idFacebook = "laminaFacebook";
     private final static String idCrearUsuario = "laminaUserCreate";
     private final static String idJPMenu = "laminaMenu";
     private final static String idJPJPBaseDeDatos = "laminaShowBaseDatos";
     private final static String idJPBtnTwitter = "laminaBtnTwitter";
+    private final static String idJPBtnFacebook = "laminaBtnFacebook";
+    private final static String idJPBtnInstagram = "laminaBtnInstagram";
+
 }

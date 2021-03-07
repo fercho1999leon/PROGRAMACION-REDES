@@ -1,5 +1,5 @@
 
-import complementos.RunJavaAndPythonTwitter;
+import complementos.RunJavaAndPython;
 import complementos.SaveSVGformatInSQLofTwitter;
 import java.awt.CardLayout;
 import java.io.BufferedReader;
@@ -176,7 +176,7 @@ public class GuiBtnTwitter extends javax.swing.JPanel {
         // TODO add your handling code here:
         String name = txtUsuarioTwitter.getText();
         String itens = String.valueOf((int)spItens.getValue());
-        RunJavaAndPythonTwitter obj = new RunJavaAndPythonTwitter(9999,name,itens);
+        RunJavaAndPython obj = new RunJavaAndPython(9999,name,itens);
         Runnable contPython = obj;
         Thread hilo = new Thread(contPython);
         hilo.start();

@@ -16,8 +16,9 @@ public class GuiBtnInstagram extends javax.swing.JPanel {
     /**
      * Creates new form GuiBtnInstagram
      */
-    public GuiBtnInstagram() {
+    public GuiBtnInstagram(javax.swing.JPanel contenedor) {
         initComponents();
+        this.contenedor=contenedor;
     }
 
     /**
@@ -120,6 +121,14 @@ public class GuiBtnInstagram extends javax.swing.JPanel {
         add(btnRunInstagram, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 120, 50));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 210, 10));
     }// </editor-fold>//GEN-END:initComponents
+
+    public String getUsuarioLogin() {
+        return UsuarioLogin;
+    }
+
+    public void setUsuarioLogin(String UsuarioLogin) {
+        this.UsuarioLogin = UsuarioLogin;
+    }
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:

@@ -13,7 +13,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
 
-public class RunJavaAndPythonTwitter implements Runnable {
+public class RunJavaAndPython implements Runnable {
 
     private int port;
     private boolean bandera;
@@ -23,7 +23,7 @@ public class RunJavaAndPythonTwitter implements Runnable {
     private String name;
     private String itens;
 
-    public RunJavaAndPythonTwitter(int port, String name, String itens) {
+    public RunJavaAndPython(int port, String name, String itens) {
         this.port = port;
         bandera = true;
         this.name=name;
