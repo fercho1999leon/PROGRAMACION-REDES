@@ -23,6 +23,7 @@ public class JPTableDataTwitter extends javax.swing.JPanel {
     /**
      * Creates new form JPTableDataTwitter
      */
+    
     public JPTableDataTwitter() {
         initComponents();
     }

@@ -6,12 +6,7 @@
 package guiTablas;
 
 import complementos.ModeloOpc;
-import complementos.MySqlConnection;
 import complementos.RunTableOpc;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,16 +14,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author FERNANDO
  */
-public class JPTableOpcTwitter extends javax.swing.JPanel {
+public class JPTableOpcFacebook extends javax.swing.JPanel {
+    DefaultTableModel modelTableFacebook;
     /**
-     * Creates new form JPTableOpcTwitter
+     * Creates new form JPTableOpcFacebook
      */
     private RunTableOpc table;
-    public JPTableOpcTwitter() {
+    public JPTableOpcFacebook() {
         initComponents();
-        table = new RunTableOpc(jtOpcTwitter,"registroconsultatwitter");
+        table = new RunTableOpc(jtOpcFacebook,"registroconsultafacebook");
     }
-
     public RunTableOpc getTable() {
         return table;
     }
@@ -36,7 +31,7 @@ public class JPTableOpcTwitter extends javax.swing.JPanel {
     public void setTable(RunTableOpc table) {
         this.table = table;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,28 +42,22 @@ public class JPTableOpcTwitter extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtOpcTwitter = new javax.swing.JTable();
+        jtOpcFacebook = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
-
-        jtOpcTwitter.setForeground(new java.awt.Color(58, 180, 180));
-        jtOpcTwitter.setModel(new javax.swing.table.DefaultTableModel(
+        jtOpcFacebook.setBackground(new java.awt.Color(255, 255, 255));
+        jtOpcFacebook.setForeground(new java.awt.Color(58, 180, 180));
+        jtOpcFacebook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
-        jScrollPane1.setViewportView(jtOpcTwitter);
+        jScrollPane1.setViewportView(jtOpcFacebook);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 260));
     }// </editor-fold>//GEN-END:initComponents
@@ -76,6 +65,6 @@ public class JPTableOpcTwitter extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtOpcTwitter;
+    private javax.swing.JTable jtOpcFacebook;
     // End of variables declaration//GEN-END:variables
 }

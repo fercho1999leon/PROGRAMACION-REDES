@@ -1,5 +1,7 @@
 
 import guiTablas.JPTableDataTwitter;
+import guiTablas.JPTableDateFacebook;
+import guiTablas.JPTableOpcFacebook;
 import guiTablas.JPTableOpcTwitter;
 import java.awt.CardLayout;
 import java.sql.SQLException;
@@ -27,6 +29,8 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
         this.contenedor=contenedor;
         tablaOpcTwitter = new JPTableOpcTwitter();
         tableDataTwtter = new JPTableDataTwitter();
+        tablaOpcFacebook = new JPTableOpcFacebook();
+        tableDataFacebook = new JPTableDateFacebook ();
         
         
         //GRUPOS DE BOTONES
@@ -38,11 +42,12 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
         //Agregar laminal al contenedor jpOpcRedSocial cardLayout
         jpOpcRedSocial.setLayout(new java.awt.CardLayout(0,0));
         jpOpcRedSocial.add(tablaOpcTwitter,idJPTableOpcTwitter);
-        
+        jpOpcRedSocial.add(tablaOpcFacebook,idJPTableOpcFacebook);        
         
         //Agregar laminal al contenedor jpTableRedSocial cardLayout
         jpTableRedSocial.setLayout(new java.awt.CardLayout(0,0));
         jpTableRedSocial.add(tableDataTwtter,idJPTableDataTwitter);
+        jpTableRedSocial.add(tableDataFacebook,idJPTableDataFacebook);
     }
     
     
@@ -185,7 +190,13 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
     private void RadioButtonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonsActionPerformed
         // TODO add your handling code here:
         if(btnGrupo.isSelected(rbTwitter.getModel())){
-            tablaOpcTwitter.startTable();
+            tablaOpcTwitter.getTable().startTable();
+            
+            CardLayout carta = (CardLayout)jpOpcRedSocial.getLayout();
+            carta.show(jpOpcRedSocial, idJPTableOpcTwitter);
+            carta = (CardLayout)jpTableRedSocial.getLayout();
+            carta.show(jpTableRedSocial, idJPTableDataTwitter);
+            
             opcRedSocial.setText("TWITTER");
         }
         if(btnGrupo.isSelected(rbInstagram.getModel())){
@@ -193,21 +204,30 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
             opcRedSocial.setText("INSTAGRAM");
         }
         if(btnGrupo.isSelected(rbFacebook.getModel())){
-            //tablaOpcTwitter.startTable();
+            tablaOpcFacebook.getTable().startTable();
+            
+            CardLayout carta = (CardLayout)jpOpcRedSocial.getLayout();
+            carta.show(jpOpcRedSocial, idJPTableOpcFacebook);
+            carta = (CardLayout)jpTableRedSocial.getLayout();
+            carta.show(jpTableRedSocial, idJPTableDataFacebook);
+            
             opcRedSocial.setText("FACEBOOK");
         }
     }//GEN-LAST:event_RadioButtonsActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        String texto = txtIdBusqueda.getText();
         if(btnGrupo.isSelected(rbTwitter.getModel())){
-            String texto = txtIdBusqueda.getText();
             tableDataTwtter.setValorConsulta(texto);
             tableDataTwtter.startTable();
             txtIdBusqueda.setText("Ingrese el ID");
         }
-        if(btnGrupo.isSelected(rbTwitter.getModel())){
+        if(btnGrupo.isSelected(rbFacebook.getModel())){
             //tablaOpcTwitter.startTable();
+            tableDataFacebook.setValorConsulta(texto);
+            tableDataFacebook.startTable();
+            txtIdBusqueda.setText("Ingrese el ID");
         }
         if(btnGrupo.isSelected(rbTwitter.getModel())){
             //tablaOpcTwitter.startTable();
@@ -243,9 +263,13 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
     private final static String idJPMenu = "laminaMenu";
     private final static String idJPTableOpcTwitter = "laminaTableOpcTwitter";
     private final static String idJPTableDataTwitter = "laminaTableDataTwitter";
+    private final static String idJPTableOpcFacebook = "laminaTableOpcFacebook";
+    private final static String idJPTableDataFacebook = "laminaTableDataFacebook";
     
     private javax.swing.ButtonGroup btnGrupo;
     private JPTableOpcTwitter tablaOpcTwitter;
     private JPTableDataTwitter tableDataTwtter;
+    private JPTableOpcFacebook tablaOpcFacebook;
+    private JPTableDateFacebook tableDataFacebook;
     
 }

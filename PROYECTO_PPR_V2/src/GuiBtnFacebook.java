@@ -76,7 +76,7 @@ public class GuiBtnFacebook extends javax.swing.JPanel {
         jLabel4.setText("Cantidad de Paginas");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, 30));
 
-        spItens.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
+        spItens.setModel(new javax.swing.SpinnerNumberModel(2, 2, 30, 1));
         spItens.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         add(spItens, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 50, 30));
 
@@ -171,7 +171,6 @@ public class GuiBtnFacebook extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRunFacebookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunFacebookActionPerformed
-        // TODO add your handling code here:
         // TODO add your handling code here:
         String name = txtUsuarioFacebook.getText();
         String itens = String.valueOf((int)spItens.getValue());
