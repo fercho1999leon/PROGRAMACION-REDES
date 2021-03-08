@@ -17,15 +17,14 @@ profile = Profile(nameInstagram)
 profile.scrape()
 date = profile.get_recent_posts(itensInstagram)
 instagram = []
-cont = 0
 for s in date:
-    cont += 1
     temp = [s.json_dict['id'],s.json_dict['shortcode'],s.json_dict['display_url'],json.dumps(s.json_dict['edge_media_to_comment']),json.dumps(s.json_dict['edge_liked_by'])]
     print (s.json_dict['id'],s.json_dict['shortcode'],s.json_dict['display_url'],json.dumps(s.json_dict['edge_media_to_comment']),json.dumps(s.json_dict['edge_liked_by']))
     temp = tuple(temp)
     instagram.append(temp)
-    print ("Se inserto "+cont+"/"+itensInstagram)
 
 df = pd.DataFrame(instagram,columns = ['id','shortcode','display_url','edge_media_to_comment','edge_liked_by'])
 df.to_csv(path_or_buf = 'src/scriptPython/data/Instagram.csv', index=False) 
+
+my_socket.close()
 
