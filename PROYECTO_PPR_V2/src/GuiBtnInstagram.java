@@ -1,5 +1,9 @@
 
+import complementos.RunJavaAndPython;
 import java.awt.CardLayout;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -118,6 +122,11 @@ public class GuiBtnInstagram extends javax.swing.JPanel {
                 btnRunInstagramMouseExited(evt);
             }
         });
+        btnRunInstagram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRunInstagramActionPerformed(evt);
+            }
+        });
         add(btnRunInstagram, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 120, 50));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 210, 10));
     }// </editor-fold>//GEN-END:initComponents
@@ -159,6 +168,34 @@ public class GuiBtnInstagram extends javax.swing.JPanel {
         // TODO add your handling code here:
         btnRunInstagram.setText("");
     }//GEN-LAST:event_btnRunInstagramMouseExited
+
+    private void btnRunInstagramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunInstagramActionPerformed
+        // TODO add your handling code here:
+        String name = txtUsuarioInstagran.getText();
+        String itens = String.valueOf((int)spItens.getValue());
+        RunJavaAndPython obj = new RunJavaAndPython(9999,name,itens);
+        Runnable contPython = obj;
+        Thread hilo = new Thread(contPython);
+        hilo.start();
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c py src/scriptPython/INSTAGRAM.py");
+            lbMessengerScrip.setForeground(new java.awt.Color(96,229,117));
+            InputStream is = p.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String aux = br.readLine();
+            while (aux != null) {
+                // Se escribe la linea en pantalla
+                System.out.println(aux);
+
+                // y se lee la siguiente.
+                aux = br.readLine();
+            }
+            //Thread.sleep(1000);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnRunInstagramActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
