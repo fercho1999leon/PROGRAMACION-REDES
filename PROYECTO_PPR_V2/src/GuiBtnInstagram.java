@@ -196,7 +196,7 @@ public class GuiBtnInstagram extends javax.swing.JPanel {
             // TODO Auto-generated catch block
             System.out.println(e.getMessage());
         }
-        SaveSVGformatInSQLofInstagram OBJ = new SaveSVGformatInSQLofInstagram("src/scriptPython/data/Facebook.csv");
+        SaveSVGformatInSQLofInstagram OBJ = new SaveSVGformatInSQLofInstagram("src/scriptPython/data/Instagram.csv");
         OBJ.start(UsuarioLogin);
         lbMessengerBD.setForeground(new java.awt.Color(96,229,117));
     }//GEN-LAST:event_btnRunInstagramActionPerformed

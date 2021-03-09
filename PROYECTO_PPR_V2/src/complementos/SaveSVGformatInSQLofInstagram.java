@@ -49,9 +49,9 @@ public class SaveSVGformatInSQLofInstagram {
             }
             readCsv.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Error FileNotFoundException SaveSVGformatInSQLofFacebook: "+e.getMessage());
+            System.out.println("Error FileNotFoundException SaveSVGformatInSQLofInstagram: "+e.getMessage());
         } catch (IOException e) {
-            System.out.println("Error IOException SaveSVGformatInSQLofFacebook HOLA: "+e.getMessage());
+            System.out.println("Error IOException SaveSVGformatInSQLofInstagram HOLA: "+e.getMessage());
         }
         return data;
     }
@@ -68,7 +68,7 @@ public class SaveSVGformatInSQLofInstagram {
             
             
             Statement my_statement2 = conet.createStatement();
-            ResultSet my_resultSet = my_statement2.executeQuery("SELECT MAX(id) FROM registroconsultafacebook");
+            ResultSet my_resultSet = my_statement2.executeQuery("SELECT MAX(id) FROM registroconsultainstagram");
             my_resultSet.next();
             String registro = my_resultSet.getString("MAX(id)");
             System.out.println("---------->  "+registro);
@@ -88,7 +88,7 @@ public class SaveSVGformatInSQLofInstagram {
             my_statement.close();
             conet.close();
         }catch(SQLException e){
-            System.out.println("Error SQLException SaveSVGformatInSQLofFacebook: "+e.getMessage()+"\n"+e.getSQLState());
+            System.out.println("Error SQLException SaveSVGformatInSQLofInstagram: "+e.getMessage()+"\n"+e.getSQLState());
         }
         
     }
