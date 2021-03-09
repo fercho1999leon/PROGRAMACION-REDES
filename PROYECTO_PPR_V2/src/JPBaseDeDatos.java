@@ -1,13 +1,11 @@
 
 import guiTablas.JPTableDataTwitter;
 import guiTablas.JPTableDateFacebook;
+import guiTablas.JPTableDateInstagram;
 import guiTablas.JPTableOpcFacebook;
+import guiTablas.JPTableOpcInstagram;
 import guiTablas.JPTableOpcTwitter;
 import java.awt.CardLayout;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ButtonModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,6 +29,8 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
         tableDataTwtter = new JPTableDataTwitter();
         tablaOpcFacebook = new JPTableOpcFacebook();
         tableDataFacebook = new JPTableDateFacebook ();
+        tableDataInstagram = new JPTableDateInstagram ();
+        tablaOpcInstagram = new JPTableOpcInstagram ();
         
         
         //GRUPOS DE BOTONES
@@ -42,12 +42,14 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
         //Agregar laminal al contenedor jpOpcRedSocial cardLayout
         jpOpcRedSocial.setLayout(new java.awt.CardLayout(0,0));
         jpOpcRedSocial.add(tablaOpcTwitter,idJPTableOpcTwitter);
-        jpOpcRedSocial.add(tablaOpcFacebook,idJPTableOpcFacebook);        
+        jpOpcRedSocial.add(tablaOpcFacebook,idJPTableOpcFacebook);    
+        jpOpcRedSocial.add(tablaOpcInstagram,idJPTableOpcInstagram);    
         
         //Agregar laminal al contenedor jpTableRedSocial cardLayout
         jpTableRedSocial.setLayout(new java.awt.CardLayout(0,0));
         jpTableRedSocial.add(tableDataTwtter,idJPTableDataTwitter);
         jpTableRedSocial.add(tableDataFacebook,idJPTableDataFacebook);
+        jpTableRedSocial.add(tableDataInstagram,idJPTableDataInstagram);
     }
     
     
@@ -201,6 +203,12 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
         }
         if(btnGrupo.isSelected(rbInstagram.getModel())){
             //tablaOpcTwitter.startTable();
+            tablaOpcInstagram.getTable().startTable();
+            
+            CardLayout carta = (CardLayout)jpOpcRedSocial.getLayout();
+            carta.show(jpOpcRedSocial, idJPTableOpcInstagram);
+            carta = (CardLayout)jpTableRedSocial.getLayout();
+            carta.show(jpTableRedSocial, idJPTableDataInstagram);
             opcRedSocial.setText("INSTAGRAM");
         }
         if(btnGrupo.isSelected(rbFacebook.getModel())){
@@ -229,8 +237,11 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
             tableDataFacebook.startTable();
             txtIdBusqueda.setText("Ingrese el ID");
         }
-        if(btnGrupo.isSelected(rbTwitter.getModel())){
+        if(btnGrupo.isSelected(rbInstagram.getModel())){
             //tablaOpcTwitter.startTable();
+            tableDataInstagram.setValorConsulta(texto);
+            tableDataInstagram.startTable();
+            txtIdBusqueda.setText("Ingrese el ID");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -265,11 +276,15 @@ public class JPBaseDeDatos extends javax.swing.JPanel {
     private final static String idJPTableDataTwitter = "laminaTableDataTwitter";
     private final static String idJPTableOpcFacebook = "laminaTableOpcFacebook";
     private final static String idJPTableDataFacebook = "laminaTableDataFacebook";
+    private final static String idJPTableDataInstagram = "laminaTableDataInstagram";
+    private final static String idJPTableOpcInstagram = "laminaTableOpcInstagram";
     
     private javax.swing.ButtonGroup btnGrupo;
     private JPTableOpcTwitter tablaOpcTwitter;
     private JPTableDataTwitter tableDataTwtter;
     private JPTableOpcFacebook tablaOpcFacebook;
     private JPTableDateFacebook tableDataFacebook;
+    private JPTableDateInstagram tableDataInstagram;
+    private JPTableOpcInstagram tablaOpcInstagram;
     
 }
