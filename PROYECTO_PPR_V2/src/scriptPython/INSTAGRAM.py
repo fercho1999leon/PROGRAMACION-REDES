@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import socket
 
-#BUFFER_SIZE = 4096
+BUFFER_SIZE = 4096
 
 my_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 my_socket.connect(('localhost',9999))
@@ -26,7 +26,8 @@ for s in date:
     instagram.append(temp)
 
 df = pd.DataFrame(instagram,columns = ['id','shortcode','display_url','edge_media_to_comment','edge_liked_by'])
-df.to_csv(path_or_buf = 'data/Instagram.csv', index=False) 
+df.to_csv(path_or_buf = 'src/scriptPython/data/Instagram.csv', index=False) 
 
 my_socket.close()
+
 

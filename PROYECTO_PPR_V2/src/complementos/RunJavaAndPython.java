@@ -11,6 +11,7 @@ package complementos;
  */
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.*;
 
 public class RunJavaAndPython implements Runnable {
@@ -40,13 +41,7 @@ public class RunJavaAndPython implements Runnable {
                     out = new DataOutputStream(request.getOutputStream());
                     out.write(name.getBytes());
                     out.write(itens.getBytes());
-                    if (!bandera) {
-                        break;
-                    }
 
-                    if (request.isConnected()) {
-                        break;
-                    }
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     System.out.println(e.getMessage());

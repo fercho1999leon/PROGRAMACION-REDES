@@ -191,7 +191,7 @@ public class GuiBtnInstagram extends javax.swing.JPanel {
                 // y se lee la siguiente.
                 aux = br.readLine();
             }
-            //Thread.sleep(1000);
+            Thread.sleep(8000);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             System.out.println(e.getMessage());
